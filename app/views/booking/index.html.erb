@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    form {
+      margin: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 800px; /* Limits the width for larger screens */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px; /* Space between input and button */
+    }
+
+    .search-box > input {
+      width: 100%;
+      max-width: 600px; /* Maximum width for the input field */
+      height: 50px;
+      border-radius: 10px;
+      padding: 0 15px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .search-box > button {
+      width: 100%;
+      max-width: 200px; /* Maximum width for the button */
+      height: 50px;
+      background-color: #0baa0b;
+      border: 0;
+      border-radius: 10px;
+      color: #f0f0f0;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .img-box {
+      width: 100%;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .img-box > img {
+      max-width: 100%;
+      height: auto; /* Maintain aspect ratio */
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .search-box > input,
+      .search-box > button {
+        width: 90%; /* Adjust input and button width for smaller screens */
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <form method="post">
+    <div class="search-box">
+      <input type="text" placeholder="Places to go, things to do">
+      <button type="submit">Search</button>
+    </div>
+  </form>
+
+  <div class="img-box">
+    <%= image_tag 'taj-mahal.png', alt: 'Scenic Image' %>
+  </div>
+</body>
+</html>

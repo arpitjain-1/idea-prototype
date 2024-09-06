@@ -1,0 +1,147 @@
+.auth-btn{
+  border-radius: 10px;
+  border: 0;
+  background-color: transparent;
+  transition: 0.5s all ease;
+}
+
+.auth-btn:hover{
+  background-color: #088a08;
+}
+
+.heading {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.select-state, .select-district {
+  width: 25%;
+  padding: 10px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.image-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.image-container img {
+  width: 100%;
+  height: 200px; /* Fixed height */
+  object-fit: cover; /* Ensure image covers the container without distortion */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .image-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust for smaller screens */
+  }
+
+  .image-container img {
+    height: 150px; /* Adjust height for smaller screens */
+  }
+}
+
+
+.heritage-sites {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.heritage-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.place-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.extra-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.extra-section p {
+  margin: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.extra-section button {
+  padding: 8px 16px;
+  background-color: #0baa0b;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.extra-section button:hover {
+  background-color: #088a08;
+}
+
+@media (max-width: 768px) {
+  .heritage-card {
+    width: 90%;
+    flex-direction: column;
+  }
+
+  .form-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .select-state, .select-district {
+    width: 100%;
+  }
+}
+
+/* Ensure that the icon color and size are correct */
+.btn-floating i {
+  font-size: 1.5rem; /* Adjust size as needed */
+  color: #ffffff; /* Ensure icon color is visible */
+}
+
+/* If using the button class from MDB, ensure text color is set correctly */
+.btn-floating {
+  color: #ffffff; /* Ensure button text color is visible */
+}
+
+/* Optional: Adjust icon size if needed */
+.fab {
+  font-size: 1.5rem; /* Adjust size as needed */
+}

@@ -1,0 +1,111 @@
+<h1 class="heading">Booking the ticket using Bot</h1>
+
+<div class="form-section">
+  <select class="state select-state" name="state" id="state">
+    <option selected>Select the State</option>
+    <% @states.each do |s| %>
+      <option value="<%= s.short_name %>"><%= s.state_name %></option>
+    <% end %>
+  </select>
+  
+  <select class="district select-district" id="district" name="district">
+    <option>Select the District</option>
+  </select>
+</div>
+
+<div class="image-container">
+  <%= image_tag 'akshardham.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'hawa-mahal-fort-jaipur.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'mandu-fort.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'nationalMusuem.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'humbayu.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'victoria.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'darjeling.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'fatehpur.jpg', alt: 'Scenic Image' %>  
+  <%= image_tag 'gwalior.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'victoria.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'hampi.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'lalbagh.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'meenakshi.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'mysore.jpg', alt: 'Scenic Image' %>
+  <%= image_tag 'rajwada.jpg', alt: 'Scenic Image' %>
+</div>
+
+<div class="heritage-sites">
+  <!-- Heritage sites and ticket selection will be dynamically populated here -->
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Load districts based on selected state
+  $("#state").change(function(){
+    var state = $(this).val();
+    $("#district").empty().append('<option selected>Select District</option>');
+    
+    if(state){
+      $.ajax({
+        type: "GET",
+        url: "/booking/filter_dist",
+        data: { short_name: state },
+        success: function(data){
+          $.each(data.dist, function(index, district){
+            $('#district').append('<option value="'+district+'">'+district+'</option>');
+          });
+        }
+      });
+    }
+  });
+
+  // Load heritage sites based on selected district
+  $("#district").change(function(){
+    var district = $(this).val();
+    $(".heritage-sites").empty();
+    $(".image-container").remove();
+    if(district){
+      $.ajax({
+        type: "GET",
+        url: "/booking/filter_site",
+        data: { district_name: district },
+        success: function(data){
+          $.each(data.site, function(index, site){
+            $(".heritage-sites").append(`
+              <div class="heritage-card">
+                <h2 class="Place Name">${site.title}</h2>
+                <div class="extra-section">
+                  <p>&#8377; ${site.ticket_price}/- per ticket</p>
+                  <label for="tickets_${site.id}">Select Number of Tickets:</label>
+                  <select id="tickets_${site.id}" class="ticket-quantity">
+                    <option value="0" selected>Select tickets</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  <button class="book-ticket-btn" data-site-id="${site.id}" data-price="${site.ticket_price}">Book Ticket</button>
+                </div>
+              </div>
+            `);
+          });
+        }
+      });
+    }
+  });
+
+  // Handle ticket booking button click
+  $(document).on('click', '.book-ticket-btn', function(){
+    var siteId = $(this).data('site-id');
+    var pricePerTicket = $(this).data('price');
+    var quantity = $(`#tickets_${siteId}`).val();
+    
+    if(quantity == 0){
+      alert("Please select the number of tickets.");
+    } else {
+      // Redirect to payment form, passing ticket info
+      var totalPrice = quantity * pricePerTicket;
+      window.location.href = `/payment_form?site_id=${siteId}&quantity=${quantity}&total_price=${totalPrice}`;
+    }
+  });
+});
+</script>

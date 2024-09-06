@@ -1,0 +1,43 @@
+<style>
+  .form-section{
+    margin-top: 25px
+  }
+</style>
+
+<div class="form-section">
+  <select class="state select-state" name="state" id="state">
+    <option selected>Select the State</option>
+    <% @states.each do |s| %>
+      <option value="<%= s.short_name %>"><%= s.state_name %></option>
+    <% end %>
+  </select>
+  
+  <select class="distric select-district" id="district" name="district">
+    <option>Select the District</option>
+  </select>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Load districts based on selected state
+  $("#state").change(function(){
+    var state = $(this).val();
+    $("#district").empty().append('<option selected>Select District</option>');
+    
+    if(state){
+      $.ajax({
+        type: "GET",
+        url: "/booking/filter_dist",
+        data: { short_name: state },
+        success: function(data){
+          $.each(data.dist, function(index, district){
+            $('#district').append('<option value="'+district+'">'+district+'</option>');
+          });
+        }
+      });
+    }
+  });
+});
+
+</script>

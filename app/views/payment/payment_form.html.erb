@@ -1,0 +1,105 @@
+<h1 class="heading">Payment Details</h1>
+
+<div class="payment-details">
+  <p>Site: <%= @site.title %></p>
+  <p>Ticket Price: &#8377;<%= @ticket_price %>/-</p>
+  <p>Number of Tickets: <%= @quantity %></p>
+  <p>Total Amount: &#8377;<%= @total_price %>/-</p>
+</div>
+
+<form action="/process_payment" method="post" class="payment-form">
+  <%= hidden_field_tag :site_id, @site.id %>
+  <%= hidden_field_tag :quantity, @quantity %>
+  <%= hidden_field_tag :total_price, @total_price %>
+
+  <div class="payment-method">
+    <label for="payment_method">Select Payment Method:</label>
+    <select name="payment_method" id="payment_method">
+      <option value="credit_card">Credit Card</option>
+      <option value="upi">UPI</option>
+      <option value="net_banking">Net Banking</option>
+    </select>
+  </div>
+
+  <button type="submit" class="pay-now-btn">Pay Now &#8377;<%= @total_price %></button>
+</form>
+
+<!-- CSS for styling -->
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+  }
+
+  .heading {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .payment-details {
+    background-color: #ffffff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    font-size: 16px;
+  }
+
+  .payment-details p {
+    margin: 10px 0;
+  }
+
+  .payment-form {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .payment-method {
+    margin-bottom: 20px;
+  }
+
+  .payment-method label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .payment-method select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .pay-now-btn {
+    display: block;
+    width: 100%;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .pay-now-btn:hover {
+    background-color: #218838;
+  }
+
+  @media (max-width: 768px) {
+    .payment-form {
+      width: 90%;
+    }
+  }
+</style>

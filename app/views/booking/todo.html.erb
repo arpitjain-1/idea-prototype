@@ -1,0 +1,70 @@
+<style>
+  .way-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 40px auto;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .way-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .way-container input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+
+  .way-container button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  .way-container button:hover {
+    background-color: #218838;
+  }
+
+  @media (max-width: 768px) {
+    .way-container {
+      max-width: 100%;
+      padding: 15px;
+    }
+
+    .way-container input[type="text"], 
+    .way-container button {
+      font-size: 14px;
+    }
+  }
+</style>
+
+  <div class="way-container">
+  <input type="text" placeholder="From">
+  <br>
+  <input type="text" placeholder="To">
+  <br>
+  <input type="number" placeholder="Enter Range in KM">
+  <br>
+  <button type="submit">See Places</button>
+</div>
